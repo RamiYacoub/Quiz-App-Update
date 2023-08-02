@@ -117,64 +117,72 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 Spacer(),
-                SizedBox(
-                  width: double.infinity,
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        if (yourChoiceIndex != null) {
-                          if (questionIndex < questionsWithAnswers.length - 1) {
-                            questionIndex++;
+                Padding(
+                  padding: EdgeInsets.only(bottom: 8.0),
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: 50,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          if (yourChoiceIndex != null) {
+                            if (questionIndex <
+                                questionsWithAnswers.length - 1) {
+                              questionIndex++;
+                            } else {
+                              showResultsMessage = true;
+                            }
+                            yourChoiceIndex = null;
                           } else {
-                            showResultsMessage = true;
+                            print("Please select an option");
                           }
-                          yourChoiceIndex = null;
-                        } else {
-                          print("Please select an option");
-                        }
-                      });
-                    },
-                    child: Text('Next'),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.black,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0),
+                        });
+                      },
+                      child: Text('Next'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
                       ),
                     ),
                   ),
                 ),
               ],
               if (showResultsMessage)
-                Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Congratulations!',
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 8.0),
-                      Text(
-                        'Your score is : ${questionIndex + 1}/${questionsWithAnswers.length}',
-                        style: TextStyle(
-                          fontSize: 20,
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: resetQuiz,
-                        child: Text('Reset Quiz'),
-                        style: TextButton.styleFrom(
-                          foregroundColor: Colors.green,
-                          textStyle: TextStyle(
-                            fontSize: 18,
+                Expanded(
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize
+                          .max, // Add this line to make the column take up full height
+                      children: [
+                        Text(
+                          'Congratulations!',
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                      ),
-                    ],
+                        SizedBox(height: 8.0),
+                        Text(
+                          'Your score is : ${questionIndex + 1}/${questionsWithAnswers.length}',
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: resetQuiz,
+                          child: Text('Reset Quiz'),
+                          style: TextButton.styleFrom(
+                            foregroundColor: Colors.green,
+                            textStyle: TextStyle(
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
             ],
