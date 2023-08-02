@@ -17,22 +17,42 @@ class _HomePageState extends State<HomePage> {
   List<Map<String, dynamic>> questionsWithAnswers = [
     {
       'question': 'What is your favorite sport?',
-      'answers': ['Football', 'Tennis', 'Basketball', 'Volleyball'],
+      'answers': [
+        {'text': 'Football', 'icon': Icons.sports_soccer},
+        {'text': 'Tennis', 'icon': Icons.sports_tennis},
+        {'text': 'Basketball', 'icon': Icons.sports_basketball},
+        {'text': 'Volleyball', 'icon': Icons.sports_volleyball},
+      ],
       'correctAnswer': 'Football',
     },
     {
       'question': 'What is your favorite color?',
-      'answers': ['Red', 'Green', 'Blue', 'White'],
+      'answers': [
+        {'text': 'Red', 'icon': Icons.circle, 'color': Colors.red},
+        {'text': 'Green', 'icon': Icons.circle, 'color': Colors.green},
+        {'text': 'Blue', 'icon': Icons.circle, 'color': Colors.blue},
+        {'text': 'Brown', 'icon': Icons.circle, 'color': Colors.brown},
+      ],
       'correctAnswer': 'Blue',
     },
     {
       'question': 'What is your favorite animal?',
-      'answers': ['Dog', 'Cat', 'Horse', 'Camel'],
+      'answers': [
+        {'text': 'Dog', 'icon': Icons.pets},
+        {'text': 'Cat', 'icon': Icons.pets},
+        {'text': 'Horse', 'icon': Icons.house},
+        {'text': 'Camel', 'icon': Icons.cake},
+      ],
       'correctAnswer': 'Dog',
     },
     {
       'question': 'What is your favorite sport?',
-      'answers': ['Football', 'Tennis', 'Basketball', 'Volleyball'],
+      'answers': [
+        {'text': 'Football', 'icon': Icons.sports_soccer},
+        {'text': 'Tennis', 'icon': Icons.sports_tennis},
+        {'text': 'Basketball', 'icon': Icons.sports_basketball},
+        {'text': 'Volleyball', 'icon': Icons.sports_volleyball},
+      ],
       'correctAnswer': 'Football',
     },
   ];
@@ -115,7 +135,7 @@ class _HomePageState extends State<HomePage> {
                         setState(() {
                           yourChoiceIndex = i;
                         });
-                        if (questionWithAnswer['answers'][i] ==
+                        if (questionWithAnswer['answers'][i]['text'] ==
                             questionWithAnswer['correctAnswer']) {
                           correctAnswers++;
                         }
@@ -136,15 +156,21 @@ class _HomePageState extends State<HomePage> {
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
                           child: Row(
                             children: [
-                              Icon(
-                                Icons.add,
-                                color: i == yourChoiceIndex
-                                    ? Colors.white
-                                    : Colors.black,
-                              ),
+                              questionIndex != 1
+                                  ? Icon(
+                                      questionWithAnswer['answers'][i]['icon'],
+                                      color: i == yourChoiceIndex
+                                          ? Colors.white
+                                          : Colors.black,
+                                    )
+                                  : Icon(
+                                      questionWithAnswer['answers'][i]['icon'],
+                                      color: questionWithAnswer['answers'][i]
+                                          ['color'],
+                                    ),
                               SizedBox(width: 16.0),
                               Text(
-                                questionWithAnswer['answers'][i],
+                                questionWithAnswer['answers'][i]['text'],
                                 style: TextStyle(
                                   fontSize: 16,
                                   color: i == yourChoiceIndex
