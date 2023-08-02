@@ -186,16 +186,36 @@ class _HomePageState extends State<HomePage> {
                           child: Row(
                             children: [
                               questionIndex != 1
-                                  ? Icon(
-                                      questionWithAnswer['answers'][i]['icon'],
-                                      color: i == yourChoiceIndex
-                                          ? Colors.white
-                                          : Colors.black,
+                                  ? Container(
+                                      width: 40,
+                                      height: 40,
+                                      decoration: BoxDecoration(
+                                        color: Colors.green[200],
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(15)),
+                                      ),
+                                      child: Icon(
+                                        questionWithAnswer['answers'][i]
+                                            ['icon'],
+                                        color: i == yourChoiceIndex
+                                            ? Colors.white
+                                            : Colors.black,
+                                      ),
                                     )
-                                  : Icon(
-                                      questionWithAnswer['answers'][i]['icon'],
-                                      color: questionWithAnswer['answers'][i]
-                                          ['color'],
+                                  : Container(
+                                      width: 40,
+                                      height: 40,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(15)),
+                                      ),
+                                      child: Icon(
+                                        questionWithAnswer['answers'][i]
+                                            ['icon'],
+                                        color: questionWithAnswer['answers'][i]
+                                            ['color'],
+                                      ),
                                     ),
                               SizedBox(width: 16.0),
                               Text(
