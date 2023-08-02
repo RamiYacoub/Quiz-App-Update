@@ -164,10 +164,6 @@ class _HomePageState extends State<HomePage> {
                         setState(() {
                           yourChoiceIndex = i;
                         });
-                        if (questionWithAnswer['answers'][i]['text'] ==
-                            questionWithAnswer['correctAnswer']) {
-                          correctAnswers++;
-                        }
                       },
                       child: Container(
                         width: double.infinity,
@@ -185,38 +181,48 @@ class _HomePageState extends State<HomePage> {
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
                           child: Row(
                             children: [
-                              questionIndex != 1
-                                  ? Container(
-                                      width: 40,
-                                      height: 40,
-                                      decoration: BoxDecoration(
-                                        color: Colors.green[200],
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(15)),
-                                      ),
-                                      child: Icon(
-                                        questionWithAnswer['answers'][i]
-                                            ['icon'],
-                                        color: i == yourChoiceIndex
-                                            ? Colors.white
-                                            : Colors.black,
-                                      ),
-                                    )
-                                  : Container(
-                                      width: 40,
-                                      height: 40,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(15)),
-                                      ),
-                                      child: Icon(
-                                        questionWithAnswer['answers'][i]
-                                            ['icon'],
-                                        color: questionWithAnswer['answers'][i]
-                                            ['color'],
-                                      ),
-                                    ),
+                              // ? Container(
+                              //     width: 40,
+                              //     height: 40,
+                              //     decoration: BoxDecoration(
+                              //       color: Colors.green[200],
+                              //       borderRadius: BorderRadius.all(
+                              //           Radius.circular(15)),
+                              //     ),
+                              //     child: Icon(
+                              //       questionWithAnswer['answers'][i]
+                              //           ['icon'],
+                              //       color: i == yourChoiceIndex
+                              //           ? Colors.white
+                              //           : Colors.black,
+                              //     ),
+                              //   )
+                              Container(
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  color: questionWithAnswer['answers'][i]
+                                              ['color'] !=
+                                          null
+                                      ? Colors.white
+                                      : i == yourChoiceIndex
+                                          ? Colors.green[200]
+                                          : Colors.green,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15)),
+                                ),
+                                child: Icon(
+                                  questionWithAnswer['answers'][i]['icon'],
+                                  color: questionWithAnswer['answers'][i]
+                                              ['color'] !=
+                                          null
+                                      ? questionWithAnswer['answers'][i]
+                                          ['color']
+                                      : i == yourChoiceIndex
+                                          ? Colors.white
+                                          : Colors.black,
+                                ),
+                              ),
                               SizedBox(width: 16.0),
                               Text(
                                 questionWithAnswer['answers'][i]['text'],
@@ -243,6 +249,12 @@ class _HomePageState extends State<HomePage> {
                       onPressed: () {
                         setState(() {
                           if (yourChoiceIndex != null) {
+                            if (questionWithAnswer['answers'][yourChoiceIndex]
+                                    ['text'] ==
+                                questionWithAnswer['correctAnswer']) {
+                              correctAnswers++;
+                              print(correctAnswers);
+                            }
                             if (questionIndex <
                                 questionsWithAnswers.length - 1) {
                               questionIndex++;
