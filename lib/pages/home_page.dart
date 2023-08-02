@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -65,7 +66,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 SizedBox(
-                  height: 16.0,
+                  height: 6.0,
                 ),
                 Text(
                   'Answer and get points',
@@ -74,7 +75,38 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.black54,
                   ),
                 ),
-                SizedBox(height: size.height * 0.1),
+                SizedBox(
+                  height: 15,
+                ),
+                StepProgressIndicator(
+                  totalSteps: questionsWithAnswers.length,
+                  currentStep: questionIndex + 1,
+                  size: 40,
+                  selectedColor: Colors.black,
+                  unselectedColor: Color.fromARGB(59, 119, 117, 117),
+                  customStep: (index, color, _) => color == Colors.black
+                      ? Container(
+                          color: color,
+                          child: Icon(
+                            Icons.check,
+                            color: Colors.white,
+                          ),
+                        )
+                      : Container(
+                          color: color,
+                          child: Icon(
+                            Icons.remove,
+                          ),
+                        ),
+                ),
+                SizedBox(height: 18),
+                Text(
+                  'Step ${questionIndex + 1} of ${questionsWithAnswers.length}',
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+                SizedBox(height: size.height * 0.06),
                 for (int i = 0; i < questionWithAnswer['answers'].length; i++)
                   Padding(
                     padding: const EdgeInsets.only(bottom: 16.0),
@@ -87,7 +119,6 @@ class _HomePageState extends State<HomePage> {
                             questionWithAnswer['correctAnswer']) {
                           correctAnswers++;
                         }
-                        print('correct answer = $correctAnswers');
                       },
                       child: Container(
                         width: double.infinity,
@@ -145,7 +176,11 @@ class _HomePageState extends State<HomePage> {
                             }
                             yourChoiceIndex = null;
                           } else {
-                            print("Please select an option");
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Please choose option'),
+                              ),
+                            );
                           }
                         });
                       },
