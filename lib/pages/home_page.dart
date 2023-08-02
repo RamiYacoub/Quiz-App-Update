@@ -10,31 +10,37 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int questionIndex = 0;
   bool showResultsMessage = false;
+  int correctAnswers = 0;
   int? yourChoiceIndex;
 
   List<Map<String, dynamic>> questionsWithAnswers = [
     {
       'question': 'What is your favorite sport?',
       'answers': ['Football', 'Tennis', 'Basketball', 'Volleyball'],
+      'correctAnswer': 'Football',
     },
     {
       'question': 'What is your favorite color?',
       'answers': ['Red', 'Green', 'Blue', 'White'],
+      'correctAnswer': 'Blue',
     },
     {
       'question': 'What is your favorite animal?',
       'answers': ['Dog', 'Cat', 'Horse', 'Camel'],
+      'correctAnswer': 'Dog',
     },
     {
       'question': 'What is your favorite sport?',
       'answers': ['Football', 'Tennis', 'Basketball', 'Volleyball'],
-    }
+      'correctAnswer': 'Football',
+    },
   ];
 
   void resetQuiz() {
     setState(() {
       questionIndex = 0;
       showResultsMessage = false;
+      correctAnswers = 0;
     });
   }
 
@@ -77,6 +83,11 @@ class _HomePageState extends State<HomePage> {
                         setState(() {
                           yourChoiceIndex = i;
                         });
+                        if (questionWithAnswer['answers'][i] ==
+                            questionWithAnswer['correctAnswer']) {
+                          correctAnswers++;
+                        }
+                        print('correct answer = $correctAnswers');
                       },
                       child: Container(
                         width: double.infinity,
@@ -116,7 +127,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                Spacer(),
+                const Spacer(),
                 Padding(
                   padding: EdgeInsets.only(bottom: 8.0),
                   child: SizedBox(
@@ -166,7 +177,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         SizedBox(height: 8.0),
                         Text(
-                          'Your score is : ${questionIndex + 1}/${questionsWithAnswers.length}',
+                          'Your score is : $correctAnswers/${questionsWithAnswers.length}',
                           style: TextStyle(
                             fontSize: 20,
                           ),
